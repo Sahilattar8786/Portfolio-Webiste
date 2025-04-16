@@ -19,13 +19,14 @@ jobs:
       - name: ⚙️ Build React App
         run: npm run build
 
-      - name: 🚀 Upload React Build to Hostinger (Overwrite Only)
+      - name: 🚀 Upload React Build to Hostinger (Correct Path)
         run: |
           echo "Uploading React build to /public_html..."
+          sudo apt-get update
           sudo apt-get install -y lftp
           lftp -c "set ftp:list-options -a;
             set ssl:verify-certificate no;
             open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_SERVER }};
-            mirror -R -n -e ./build/ public_html"
+            mirror -R --delete --verbose=3 build/ public_html/"
 
     
