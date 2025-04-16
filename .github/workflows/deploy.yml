@@ -22,6 +22,7 @@ jobs:
       - name: 📂 Upload files to Hostinger using FTP
         run: |
           echo "Uploading build folder via FTP..."
+          echo "Target: ftp://${{ secrets.FTP_SERVER }}"
           cd build
           find . -type f | while read file; do
             curl -T "$file" --ftp-create-dirs -u ${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_SERVER }}/public_html/"$file"
