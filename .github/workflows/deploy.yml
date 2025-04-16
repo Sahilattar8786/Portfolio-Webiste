@@ -22,8 +22,21 @@ jobs:
       - name: 📂 Upload files to Hostinger using FTP
         run: |
           echo "Uploading build folder via FTP..."
+          
+          # Check FTP login first
+          echo "Checking FTP connection..."
+          curl -v --ftp-create-dirs -u "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}" || exit 1
+          
+          # Change to the build directory
           cd build
+          
+          # Create the /public_html directory if it doesn't exist
+          echo "Creating /public_html if not exists..."
+          curl -u "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" ftp://${{ secrets.FTP_SERVER }}/public_html/ || curl -u "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" -Q "-MKD /public_html" ftp://${{ secrets.FTP_SERVER }}
+      
+          # Upload files to public_html
           find . -type f | while read file; do
             remote_path="${file#./}" # remove leading ./ from path
+            echo "Uploading $file to /public_html/$remote_path"
             curl -T "$file" --ftp-create-dirs -u "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}/public_html/$remote_path"
           done
