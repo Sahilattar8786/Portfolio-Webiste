@@ -1,4 +1,4 @@
-name: 🚀 Deploy React App to Hostinger via FTP (Clean Deploy)
+name: 🔁 Full Clean & Deploy to FTP
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,23 +19,34 @@ jobs:
       - name: ⚙️ Build React App
         run: npm run build
 
-      - name: 🧹 Clean old files from FTP
+      - name: 🧹 Clean Everything Including /public_html
         run: |
-          echo "Cleaning up FTP root (assumed to be /public_html)..."
+          echo "Installing lftp and deleting everything from FTP root..."
           sudo apt-get update
           sudo apt-get install -y lftp
+
+          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}" <<EOF
+          set ssl:verify-certificate no
+          rm -r /public_html
+          bye
+          EOF
+
+      - name: 📁 Recreate /public_html Directory
+        run: |
+          echo "Recreating /public_html folder..."
+          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}" <<EOF
+          set ssl:verify-certificate no
+          mkdir /public_html
+          bye
+          EOF
+
+      - name: 🚀 Upload Build to /public_html
+        run: |
+          echo "Uploading build to clean /public_html folder..."
           lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}" <<EOF
           set ssl:verify-certificate no
           lcd build
-          cd .
-          mirror --reverse --delete --verbose .
+          cd /public_html
+          mirror --reverse --verbose .
           bye
           EOF
-      - name: 🚀 Upload new build to Hostinger via FTP
-        run: |
-          echo "Uploading new build to /public_html..."
-          cd build
-          find . -type f | while read file; do
-            remote_path="${file#./}"  # remove ./ from file path
-            curl -T "$file" --ftp-create-dirs -u "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}/public_html/$remote_path"
-          done
