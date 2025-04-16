@@ -19,26 +19,6 @@ jobs:
       - name: ⚙️ Build React App
         run: npm run build
 
-      - name: 🧹 Clean Everything Including /public_html
-        run: |
-          echo "Installing lftp and deleting everything from FTP root..."
-          sudo apt-get update
-          sudo apt-get install -y lftp
-
-          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}" <<EOF
-          set ssl:verify-certificate no
-          rm -r /public_html
-          bye
-          EOF
-
-      - name: 📁 Recreate /public_html Directory
-        run: |
-          echo "Recreating /public_html folder..."
-          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}" <<EOF
-          set ssl:verify-certificate no
-          mkdir /public_html
-          bye
-          EOF
 
       - name: 🚀 Upload Build to /public_html
         run: |
