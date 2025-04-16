@@ -26,8 +26,7 @@ jobs:
           lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}" <<EOF
           set ssl:verify-certificate no
           cd public_html
-          mrm -f *
-          mrm -rf *
+          rm -r *
           bye
           EOF
 
