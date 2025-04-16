@@ -19,25 +19,28 @@ jobs:
       - name: ⚙️ Build React App
         run: npm run build
 
-      - name: 🧹 Clean /public_html folder on Hostinger
+      - name: 🧹 Clean /public_html on Hostinger
         run: |
-          echo "Installing lftp and cleaning /public_html..."
-          sudo apt-get update && sudo apt-get install -y lftp
-      
-          lftp -d -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}" <<EOF
-          set ssl:verify-certificate no
-          cd public_html
-          glob -a rm -r *
-          bye
-          EOF
+          echo "Installing lftp..."
+          sudo apt-get update
+          sudo apt-get install -y lftp
 
-      - name: 📂 Upload files to Hostinger /public_html
+          echo "Cleaning up /public_html..."
+          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" -e "set ftp:list-options -a;
+            set ssl:verify-certificate no;
+            open ftp://${{ secrets.FTP_SERVER }};
+            cd public_html;
+            mrm -f *;
+            mrm -rf *;
+            bye;"
+
+      - name: 📂 Upload Build to Hostinger /public_html
         run: |
-          echo "Uploading build folder via FTP..."
+          echo "Uploading build folder..."
           cd build
           find . -type f | while read file; do
-            remote_path="${file#./}" # remove leading ./ from path
-            echo "Uploading $file → /public_html/$remote_path"
+            remote_path="${file#./}"
+            echo "Uploading $file to /public_html/$remote_path"
             curl -T "$file" --ftp-create-dirs -u "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" \
               "ftp://${{ secrets.FTP_SERVER }}/public_html/$remote_path"
           done
