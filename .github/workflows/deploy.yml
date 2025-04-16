@@ -1,4 +1,4 @@
-name: 🚀 Deploy React App to Hostinger via FTP
+name: 🚀 Deploy React App to Hostinger via FTP (Native Curl)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-22.04  # ← FIXED: avoid ubuntu-24.04 issues
+    runs-on: ubuntu-latest
 
     steps:
       - name: 📥 Checkout Code
@@ -19,11 +19,10 @@ jobs:
       - name: ⚙️ Build React App
         run: npm run build
 
-      - name: 🚀 Upload to Hostinger via FTP
-        uses: w9jds/upload-ftp@v1.2.1
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./build
-          remote-dir: /public_html
+      - name: 📂 Upload files to Hostinger using FTP
+        run: |
+          echo "Uploading build folder via FTP..."
+          cd build
+          find . -type f | while read file; do
+            curl -T "$file" --ftp-create-dirs -u ${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_SERVER }}/public_html/"$file"
+          done
