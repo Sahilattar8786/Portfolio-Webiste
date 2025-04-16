@@ -23,13 +23,13 @@ jobs:
         run: |
           echo "Installing lftp and cleaning /public_html..."
           sudo apt-get update && sudo apt-get install -y lftp
-
-          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" -e "
-            set ssl:verify-certificate no;
-            cd public_html;
-            glob -a rm -r *;
-            bye
-          " "ftp://${{ secrets.FTP_SERVER }}"
+      
+          lftp -d -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}" <<EOF
+          set ssl:verify-certificate no
+          cd public_html
+          glob -a rm -r *
+          bye
+          EOF
 
       - name: 📂 Upload files to Hostinger /public_html
         run: |
