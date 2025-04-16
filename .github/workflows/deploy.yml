@@ -24,15 +24,17 @@ jobs:
           echo "Installing lftp..."
           sudo apt-get update
           sudo apt-get install -y lftp
-
+      
           echo "Cleaning up /public_html..."
-          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" -e "set ftp:list-options -a;
-            set ssl:verify-certificate no;
-            open ftp://${{ secrets.FTP_SERVER }};
-            cd public_html;
-            mrm -f *;
-            mrm -rf *;
-            bye;"
+          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" <<EOF
+          set ftp:list-options -a
+          set ssl:verify-certificate no
+          open ftp://${{ secrets.FTP_SERVER }}
+          cd public_html
+          glob
+          rm -r *
+          bye
+          EOF
 
       - name: 📂 Upload Build to Hostinger /public_html
         run: |
