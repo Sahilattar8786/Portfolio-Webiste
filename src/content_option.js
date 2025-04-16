@@ -7,11 +7,11 @@ const meta = {
 const introdata = {
     title: "I’m Sahil Attar",
     animated: {
-        first: "I love coding",
-        second: "I code cool websites",
-        third: "I develop mobile apps",
+        first: "I build full-stack web apps",
+        second: "I craft seamless user experiences",
+        third: "I turn ideas into reality with code",
     },
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum",
+    description: "I'm a passionate developer who loves creating modern, responsive websites and mobile apps. I specialize in building scalable digital products that solve real-world problems.",
     your_img_url: "https://images.unsplash.com/photo-1514790193030-c89d266d5a9d",
 };
 
@@ -36,40 +36,53 @@ const worktimeline = [{
     },
 ];
 
-const skills = [{
-        name: "Python",
+const skills = [
+    {
+        name: "MERN Stack",
         value: 90,
     },
     {
-        name: "Djano",
+        name: "React Native",
         value: 85,
     },
     {
-        name: "Javascript",
+        name: "DevOps",
         value: 80,
     },
     {
-        name: "React",
-        value: 60,
-    },
-    {
-        name: "Jquery",
+        name: "JavaScript",
         value: 85,
     },
+    {
+        name: "Python",
+        value: 80,
+    },
+    {
+        name: "Django",
+        value: 75,
+    }
 ];
-
-const services = [{
-        title: "UI & UX Design",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
+const services = [
+    {
+        title: "Custom Web Development",
+        description: "Building high-performance, scalable, and modern web applications tailored to your business needs using the latest technologies.",
     },
     {
-        title: "Mobile Apps",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
+        title: "Mobile App Development",
+        description: "End-to-end mobile app solutions for Android and iOS using React Native and other cutting-edge technologies.",
     },
     {
-        title: "Wordpress Design",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
+        title: "DevOps Integration",
+        description: "Implementing CI/CD pipelines, cloud infrastructure, and automation to streamline deployment and improve reliability.",
     },
+    {
+        title: "System Architecture (for Scalability)",
+        description: "Designing robust and scalable system architectures to handle growth and ensure high availability under load.",
+    },
+    {
+        title: "Blockchain Development (Solana)",
+        description: "Developing smart contracts and decentralized applications (dApps) on the Solana blockchain ecosystem.",
+    }
 ];
 
 const dataportfolio = [{
