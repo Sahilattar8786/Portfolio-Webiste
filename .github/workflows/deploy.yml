@@ -21,12 +21,11 @@ jobs:
 
       - name: 🧹 Clear old files from Hostinger via FTP
         run: |
-          echo "Cleaning up /public_html on FTP..."
+          echo "Cleaning up FTP root (public_html)..."
           sudo apt-get update && sudo apt-get install -y lftp
           lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}" <<EOF
           set ssl:verify-certificate no
-          cd public_html
-          rm -r *
+          rm -r public_html/*
           bye
           EOF
 
