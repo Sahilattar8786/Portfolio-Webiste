@@ -1,32 +1,58 @@
-name: 🔁 Full Clean & Deploy to FTP
+
+name: 🚀 Deploy React App to Hostinger via FTP (Native Curl)
+
+  
 
 on:
-  push:
-    branches:
-      - main
+
+push:
+
+branches:
+
+- main
+
+  
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
 
-    steps:
-      - name: 📥 Checkout Code
-        uses: actions/checkout@v3
+build-and-deploy:
 
-      - name: 📦 Install Dependencies
-        run: npm install
+runs-on: ubuntu-latest
 
-      - name: ⚙️ Build React App
-        run: npm run build
+  
 
+steps:
 
-      - name: 🚀 Upload Build to /public_html
-        run: |
-          echo "Uploading build to clean /public_html folder..."
-          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}" <<EOF
-          set ssl:verify-certificate no
-          lcd build
-          cd /public_html
-          mirror --reverse --verbose .
-          bye
-          EOF
+- name: 📥 Checkout Code
+
+uses: actions/checkout@v3
+
+  
+
+- name: 📦 Install Dependencies
+
+run: npm install
+
+  
+
+- name: ⚙️ Build React App
+
+run: npm run build
+
+  
+
+- name: 📂 Upload files to Hostinger using FTP
+
+run: |
+
+echo "Uploading build folder via FTP..."
+
+cd build
+
+find . -type f | while read file; do
+
+remote_path="${file#./}" # remove leading ./ from path
+
+curl -T "$file" --ftp-create-dirs -u "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}/public_html/$remote_path"
+
+done
