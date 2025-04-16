@@ -1,4 +1,4 @@
-name: 🚀 Deploy React App to Hostinger via FTP (Clean & Upload)
+name: 🚀 Deploy React App to Hostinger via FTP
 
 on:
   push:
@@ -21,12 +21,11 @@ jobs:
 
       - name: 🧹 Clean /public_html on Hostinger
         run: |
-          echo "Installing lftp..."
           sudo apt-get update
           sudo apt-get install -y lftp
-      
-          echo "Cleaning up /public_html..."
-          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" <<EOF
+
+          echo "Cleaning /public_html..."
+          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" ftp://${{ secrets.FTP_SERVER }} <<EOF
           set ftp:list-options -a
           set ssl:verify-certificate no
           open ftp://${{ secrets.FTP_SERVER }}
@@ -36,13 +35,11 @@ jobs:
           bye
           EOF
 
-      - name: 📂 Upload Build to Hostinger /public_html
+      - name: 🚀 Upload React Build to Hostinger
         run: |
-          echo "Uploading build folder..."
-          cd build
-          find . -type f | while read file; do
-            remote_path="${file#./}"
-            echo "Uploading $file to /public_html/$remote_path"
-            curl -T "$file" --ftp-create-dirs -u "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" \
-              "ftp://${{ secrets.FTP_SERVER }}/public_html/$remote_path"
-          done
+          echo "Uploading React build to /public_html..."
+          sudo apt-get install -y lftp
+          lftp -c "set ftp:list-options -a;
+            set ssl:verify-certificate no;
+            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_SERVER }};
+            mirror -R -e -n ./build/ public_html"
