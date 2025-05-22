@@ -107,16 +107,17 @@ const dataportfolio = [
     },
   ];
 
-const contactConfig = {
-    YOUR_EMAIL: "name@domain.com",
-    YOUR_FONE: "(555)123-4567",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vehicula eu nunc et sollicitudin. Cras pulvinar, nisi at imperdiet pharetra. ",
-    // creat an emailjs.com account 
-    // check out this tutorial https://www.emailjs.com/docs/examples/reactjs/
-    YOUR_SERVICE_ID: "service_id",
-    YOUR_TEMPLATE_ID: "template_id",
-    YOUR_USER_ID: "user_id",
-};
+  const contactConfig = {
+    YOUR_EMAIL: "contact@web3coded.com",
+    YOUR_FONE: "+91 73501 69128",
+    address: "Plot No. 478, Shahu Market Yard, Kolhapur, Maharashtra 416005",
+    description:
+      "Feel free to reach out for collaboration, freelance opportunities, or any project discussions. I'm always open to exploring innovative ideas in Web3, SaaS, and frontend development.",
+    // EmailJS configuration — replace with actual values from your EmailJS account
+    YOUR_SERVICE_ID: "service_web3coded",
+    YOUR_TEMPLATE_ID: "template_contact",
+    YOUR_USER_ID: "user_xxxxxx123456",
+  };
 
 const socialprofils = {
     github: "https://github.com/Sahilattar8786",
