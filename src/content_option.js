@@ -16,23 +16,17 @@ const introdata = {
 };
 
 const dataabout = {
-    title: "abit about my self",
-    aboutme: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis dolor id ligula semper elementum feugiat pretium nulla. Nunc non commodo dolor. Nunc mollis dignissim facilisis. Morbi ut magna ultricies.",
-};
+    title: "A bit about myself",
+    aboutme: "I'm a passionate full-stack developer with a strong focus on modern frontend technologies like React.js and Next.js, along with experience in blockchain and Web3 integrations. I enjoy turning complex problems into simple, elegant solutions and have worked with various startups to bring their digital ideas to life. Outside of coding, I’m constantly exploring new tech, contributing to open-source, and building tools that drive innovation."
+  };
 const worktimeline = [{
-        jobtitle: "MERN Stack",
-        where: "YAdfi",
-        date: "2020",
+        jobtitle: "Software Engineer",
+        where: "Zetaion System",
     },
     {
-        jobtitle: "Designer of week",
-        where: "Jamalya",
-        date: "2019",
-    },
-    {
-        jobtitle: "Designer of week",
-        where: "ALquds",
-        date: "2019",
+        jobtitle: "Senior Software Developer",
+        where: "Netcore Unbxd",
+        
     },
 ];
 
@@ -54,11 +48,11 @@ const skills = [
         value: 85,
     },
     {
-        name: "Python",
+        name: "Rust",
         value: 80,
     },
     {
-        name: "Django",
+        name: "Solidity",
         value: 75,
     }
 ];
@@ -85,85 +79,49 @@ const services = [
     }
 ];
 
-const dataportfolio = [{
-        img: "https://picsum.photos/400/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
+const dataportfolio = [
+    {
+      img: "https://web3coded.com/wp-content/uploads/2023/02/Logo.png",
+      description: "Company Website – Web3Coded: Empowering Web3, SaaS, and blockchain solutions.",
+      link: "https://web3coded.com/",
     },
     {
-        img: "https://picsum.photos/400/800/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
+      img: "https://cryptologos.cc/logos/solana-sol-logo.svg?v=032",
+      description: "Wallet Adapter – Integrated Solana wallet adapter for seamless dApp connectivity.",
+      link: "https://wallet-adapter-weld.vercel.app/",
     },
     {
-        img: "https://picsum.photos/400/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
+      img: "https://upload.wikimedia.org/wikipedia/commons/3/39/Token_icon.svg",
+      description: "Token LaunchPad – A platform for launching tokens with Solana integration.",
+      link: "https://token-launchpad-five.vercel.app/",
     },
     {
-        img: "https://picsum.photos/400/600/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
+      img: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Helpdesk_icon.svg",
+      description: "Client: APT Tech Solutions – Trusted partner in enterprise technology delivery.",
+      link: "https://apt-techsolutions.com/",
     },
     {
-        img: "https://picsum.photos/400/300/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
+      img: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Shield_icon.svg",
+      description: "Client: SecureAudit AI – AI-driven smart contract security and audit platform.",
+      link: "https://www.linkedin.com/showcase/secure-audit-ai",
     },
-    {
-        img: "https://picsum.photos/400/700/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
+  ];
 
-    {
-        img: "https://picsum.photos/400/600/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/300/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/550/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/700/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-];
-
-const contactConfig = {
-    YOUR_EMAIL: "name@domain.com",
-    YOUR_FONE: "(555)123-4567",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vehicula eu nunc et sollicitudin. Cras pulvinar, nisi at imperdiet pharetra. ",
-    // creat an emailjs.com account 
-    // check out this tutorial https://www.emailjs.com/docs/examples/reactjs/
-    YOUR_SERVICE_ID: "service_id",
-    YOUR_TEMPLATE_ID: "template_id",
-    YOUR_USER_ID: "user_id",
-};
+  const contactConfig = {
+    YOUR_EMAIL: "contact@web3coded.com",
+    YOUR_FONE: "+91 73501 69128",
+    address: "Plot No. 478, Shahu Market Yard, Kolhapur, Maharashtra 416005",
+    description:
+      "Feel free to reach out for collaboration, freelance opportunities, or any project discussions. I'm always open to exploring innovative ideas in Web3, SaaS, and frontend development.",
+    // EmailJS configuration — replace with actual values from your EmailJS account
+    YOUR_SERVICE_ID: "service_web3coded",
+    YOUR_TEMPLATE_ID: "template_contact",
+    YOUR_USER_ID: "user_xxxxxx123456",
+  };
 
 const socialprofils = {
-    github: "https://github.com",
-    facebook: "https://facebook.com",
-    linkedin: "https://linkedin.com",
-    twitter: "https://twitter.com",
+    github: "https://github.com/Sahilattar8786",
+    linkedin: "https://in.linkedin.com/company/web3codedtechnologies",
 };
 export {
     meta,
